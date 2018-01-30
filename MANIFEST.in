@@ -1,0 +1,3 @@
+recursive-include documents *
+include README.md
+recursive-include default-themes *
