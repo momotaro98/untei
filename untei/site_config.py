@@ -48,7 +48,7 @@ class SiteConfig:
         articles = []
         for f in files:
             if utils.file_type(f) == Const.FILE_TYPE_MARKDOWN:                
-                a = article.Article(f)
+                a = article.create_article_from_markdown(f)
                 articles.append(a)
                 self.__update_tags_by_article__(a)
             else:
@@ -57,7 +57,7 @@ class SiteConfig:
         self.articles_ordered_by_date = utils.order_articles_by_date(articles)
 
     def __update_tags_by_article__(self, a):
-        for tag in a.tags:
+        for tag in a.get_property('tags'):
             if tag in self.tags_to_article.keys():
                 self.tags_to_article[tag].append(a)
             else:
