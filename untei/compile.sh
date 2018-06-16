@@ -1,0 +1,1 @@
+pegjs -o ./untei/MarkdownParser.js ./ExtendedMarkdown.pegjs
