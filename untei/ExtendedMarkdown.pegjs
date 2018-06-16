@@ -44,7 +44,7 @@ assignment_symbol      = [ ]* "=" [ ]*
 
 // Passage: Block
 blocks                 = block*
-block                  = self_defined_block / comment / list / image / horizontal / math_block / code_block / h1 / h2 / h3/ h4 / h5 / h6 / paragraph / effective_breaklines / reference_block
+block                  = self_defined_block / comment / list / image / horizontal / math_block / code_block / quote_block / h1 / h2 / h3/ h4 / h5 / h6 / paragraph / effective_breaklines / reference_block
 comment                = "<!--" content_comment "-->"                     { return "" }
     content_comment    = $(!"-->" . breakline?)*
 list                   = items:list_item+                                 { return "<ul>\n" + items.join("\n") + "\n</ul>" } 
@@ -53,8 +53,10 @@ list                   = items:list_item+                                 { retu
 image                  = "!" alternative:square_bracket ref:round_bracket { return "<img src='" + ref + "' alt='" + alternative + "' />"}
 horizontal             = "---" "-"*                                       { return "<hr />" }
 math_block             = "$$" expression:math_expression "$$"             { return "$$" + expression + "$$" }
-code_block             = "```" code_block_option code:code_chars "```"    { return "<pre><code>" + code + "</code></pre>" }
+code_block             = "```" code_block_option code:code_chars "```"    { return "<div class='common_box code_block'><pre><code>" + code + "</code></pre></div>" }
     code_block_option  = [^\n]* breakline                                 { return "" }
+quote_block            = quote:quote_line+                                { return "<blockquote>" + quote.join("<br>") + "</blockquote>" }
+    quote_line         = ">" [ ]* quote:$[^\n]* breakline?                { return quote }
 h1                     = "# "      head:char_components breakline?        { return "<h1>" + head + "</h1>" }
 h2                     = "## "     head:char_components breakline?        { return "<h2>" + head + "</h2>" }
 h3                     = "### "    head:char_components breakline?        { return "<h3>" + head + "</h3>" }
@@ -62,7 +64,7 @@ h4                     = "#### "   head:char_components breakline?        { retu
 h5                     = "##### "  head:char_components breakline?        { return "<h5>" + head + "</h5>" }
 h6                     = "###### " head:char_components breakline?        { return "<h6>" + head + "</h6>" }
 paragraph              = passage:char_components breakline?               { return "<p>" + passage.join("") + "</p>" }
-effective_breaklines   = breakline:breakline+                             { return breakline.map(()=> {return "<br>"}).join("") }
+effective_breaklines   = breakline:breakline+                             { return "<br>" }
 reference_block        = lines:reference_line+                            { return lines.join("<br>") }
     reference_line     = "[" id:[0-9]+ "] " url:[^\n]+                    { return "[" + id + "] " + url.join("") } 
 
@@ -82,6 +84,6 @@ bold                   = "**" content:content_bold   "**"                 { retu
 italic                 = "_"  content:content_italic "_"                  { return "<i>" + content + "</i>" }
 link                   = content:square_bracket ref:round_bracket         { return "<a href='" + ref + "'>" + content + "</a>" }
 math_inline            = "$" expression:$math_expression "$"              { return "$" + expression + "$" }
-inline_code            = "`" code:$(!"`" .)+ "`"                          { return "<code>" + code + "</code>" }
+inline_code            = "`" code:$(!"`" .)+ "`"                          { return "<code class='common_box code_block'>" + code + "</code>" }
 chars                  = $(!" **" !" _" !" `" !" $" !"[" !"\n" .)+
 reference              = "[^" id:[0-9]+ "]"                               { return "[" + id + "]" }
