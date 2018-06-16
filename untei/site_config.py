@@ -47,13 +47,10 @@ class SiteConfig:
     def add_articles(self, files):
         articles = []
         for f in files:
-            if utils.file_type(f) == Const.FILE_TYPE_MARKDOWN:
-                try:
-                    a = article.Article(f)
-                    articles.append(a)
-                    self.__update_tags_by_article__(a)
-                except:
-                    print("Parse Error: " + f)
+            if utils.file_type(f) == Const.FILE_TYPE_MARKDOWN:                
+                a = article.Article(f)
+                articles.append(a)
+                self.__update_tags_by_article__(a)
             else:
                 pass
 

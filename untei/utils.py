@@ -52,13 +52,13 @@ def order_articles_by_date(articles):
     if n <= 1:
         return articles
 
-    pivot_date = articles[int(0.5 * n)].date
+    pivot_date = articles[int(0.5 * n)].get_property('date')
 
     later   = []
     earlier = []
 
     for a in articles:
-        if a.date >= pivot_date:
+        if a.get_property('date') >= pivot_date:
             later.append(a)
         else:
             earlier.append(a)

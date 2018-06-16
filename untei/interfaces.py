@@ -32,7 +32,7 @@ def __latest_articles__(config, tag, n):
         return config.articles_ordered_by_date[:n]
     articles_list = []
     for a in config.articles_ordered_by_date:
-        if tag in a.tags:
+        if tag in a.get_property('tags'):
             articles_list.append(a)
 
     return articles_list[:n]
