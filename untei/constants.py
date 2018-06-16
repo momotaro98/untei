@@ -12,7 +12,7 @@ def _path_concatinate(p1, p2):
 
 class Const:
     # arguments
-    FILES_PATH = sys.argv[1] + "/"
+    FILES_PATH = sys.argv[1] + "/" if len(sys.argv) > 1 else "./"
     # Essential file names
     OUTPUT_DIRECTORY =  _path_concatinate(FILES_PATH, "output/")
     SITE_CONFIG_PATH  = _path_concatinate(FILES_PATH, "theme/site_config.txt")
