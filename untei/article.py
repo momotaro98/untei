@@ -3,6 +3,7 @@ from untei.markdown_parser import ParseResult
 from datetime import datetime
 from untei import utils
 import os
+import traceback
 
 
 # def is_markdown(path):
@@ -11,9 +12,7 @@ import os
 class Article:
     def __init__(self, path):
 
-
-        parse_result = ParseResult(open(Const.FILES_PATH + path).read())
-
+        parse_result = ParseResult(Const.FILES_PATH + path)
         self.file_type = utils.file_type(path)
         self.path = utils.file_name(path) + ".html"
 

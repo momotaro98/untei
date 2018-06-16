@@ -13,8 +13,9 @@ def data_dir(dir_name):
 
 datafiles = data_dir('default-themes')
 datafiles.extend(data_dir('documentation'))
+datafiles.extend(['compile.sh','ExtendedMarkdown.pegjs','WrapParser.js'])
 
-dependencies = ['parsimonious']
+dependencies = []
 setup(
     name = "untei",
     packages = ["untei"],
