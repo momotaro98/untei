@@ -6,3 +6,4 @@ MANIFEST
 untei.egg-info/
 dist
 untei/MarkdownParser.js
+.vscode/*
