@@ -19,7 +19,7 @@ dependencies = []
 setup(
     name = "untei",
     packages = ["untei"],
-    version = "0.0.25",
+    version = "0.0.26",
     description = "Static site generator you can create your own theme by python coding",
     author = "Hara Yuki",
     author_email = "youhui.dev@gmail.com",
