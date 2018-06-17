@@ -121,3 +121,13 @@ p.definition_box_body {
 span.definition_box_flag {
 
 }
+
+blockquote {
+  border-left: 3px solid gray;
+  background-color:  #f1f1f1;
+  margin: 0;
+  padding-left   : 10px; 
+  padding-top    :  5px; 
+  padding-bottom :  5px; 
+
+}

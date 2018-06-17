@@ -13,12 +13,13 @@ def data_dir(dir_name):
 
 datafiles = data_dir('default-themes')
 datafiles.extend(data_dir('documentation'))
+datafiles.extend(['MarkdownParser.js','WrapParser.js'])
 
-dependencies = ['parsimonious']
+dependencies = []
 setup(
     name = "untei",
     packages = ["untei"],
-    version = "0.0.24",
+    version = "0.0.25",
     description = "Static site generator you can create your own theme by python coding",
     author = "Hara Yuki",
     author_email = "youhui.dev@gmail.com",

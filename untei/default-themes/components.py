@@ -15,11 +15,11 @@ def create_short_article_box(article):
 
     tags = ""
 
-    for tag in article.tags:
+    for tag in article.get_property('tags'):
         tags = tags + "<a href='" + tag + ".html'>" + tag + "</a>  "
 
-    box = temp.replace("{{link}}", article.path)\
-            .replace("{{article.title}}", article.title)\
+    box = temp.replace("{{link}}", article.get_property('title'))\
+            .replace("{{article.title}}", article.get_property('title'))\
             .replace("{{tag_list}}", tags)\
-            .replace("{{article.description}}", article.description)
+            .replace("{{article.description}}", article.get_property('description'))
     return box
