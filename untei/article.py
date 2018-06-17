@@ -32,8 +32,8 @@ def regulate_property(property_dict, file_name, file_create_time):
     return {
         'title'       : complement_value('title', file_name),
         'path'        : complement_value('title', file_name) + '.html',
-        'tags'        : re.split(r',\s*', complement_value('tags'    , '')),
-        'authors'     : re.split(r',\s*', complement_value('authors' , '')),
+        'tags'        : filter(lambda x: x != '', re.split(r',\s*', complement_value('tags'    , ''))),
+        'authors'     : filter(lambda x: x != '', re.split(r',\s*', complement_value('authors' , ''))),
         'date'        : get_date(file_create_time),
         'status'      : complement_value('status', Const.ARTICLE_STATUS_READY),
         'description' : complement_value('description', '')
