@@ -1,5 +1,5 @@
 import unittest
-from utils import safe_apply_template
+from untei.utils import safe_apply_template
 
 
 class TestUtils(unittest.TestCase):
