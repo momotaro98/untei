@@ -21,24 +21,21 @@ def is_uncopied(filename):
 
 def safe_apply_template(template, assignment_dict):
     safe_assignment_dict = {}
-    for check_key in assignment_dict.keys():
-        for key in assignment_dict.keys():
-            if key in assignment_dict[check_key]:
-                # create a temporary key
-                while True:
-                    temp_key = str(random.random())
-                    if not(temp_key in assignment_dict[key]) and not(temp_key in template):
-                        break
-
-                # Evacuation
-                safe_assignment_dict[temp_key] = key
-                assignment_dict[check_key] = assignment_dict[check_key].replace(key, temp_key)
-            else:
-                pass
+    for key, val in assignment_dict.items():
+        if any(k in val for k in assignment_dict.keys()):
+            tmp_uniq = generate_uniq_str(template, assignment_dict, safe_assignment_dict)
+            # Evacuation
+            assignment_dict[key] = assignment_dict[key].replace(val, tmp_uniq)
+            safe_assignment_dict[tmp_uniq] = val
     rep = replace_with_dict(template, assignment_dict)
     rep = replace_with_dict(rep, safe_assignment_dict)
     return rep
 
+def generate_uniq_str(template, assignment_dict, safe_assignment_dict):
+    while True:
+        ret_uniq = str(random.random())
+        if ret_uniq not in template and ret_uniq not in assignment_dict.keys() and ret_uniq not in safe_assignment_dict.keys():
+            return ret_uniq
 
 def replace_with_dict(target, assignment_dict):
     rep = target
